@@ -8,10 +8,9 @@ public class BruteCollinearPoints {
     private final LineSegment[] segments;
 
     public   BruteCollinearPoints(Point[] points){
-        int segmentsNum = 0;
-        int len = points.length;
-        Point[][] storage = new Point[len * len][2];
-
+        //check if array is null
+        if (points == null)
+            throw new IllegalArgumentException("Argument of the constructor is NULL.");
         //check for invalid point
         for (int i = 0; i < points.length; i++)
         {
@@ -27,6 +26,11 @@ public class BruteCollinearPoints {
                     throw new IllegalArgumentException("Two input points are equal.");
             }
         }
+
+        int segmentsNum = 0;
+        int len = points.length;
+        Point[][] storage = new Point[len * len][2];
+
 
         //sort the points firstly so that the segment will be represented by the smallest and biggest point
         Arrays.sort(points);
@@ -71,42 +75,46 @@ public class BruteCollinearPoints {
     }
 
     //other methods of this class
-    public   int numberOfSegements()
+    public   int numberOfSegments()
     {
         return (segments.length);
     }
    
     public   LineSegment[] segments()
-    {
-        return segments;
+    {        
+        LineSegment[] outputSegments = new LineSegment[segments.length];
+        for (int i = 0; i < segments.length; i++) {
+            outputSegments[i] = segments[i];
+        }
+        return outputSegments;
     }
     public static void main(String[] args) {
 
-    // read the n points from a file
-    In in = new In(args[0]);
-    int n = in.readInt();
-    Point[] points = new Point[n];
-    for (int i = 0; i < n; i++) {
-        int x = in.readInt();
-        int y = in.readInt();
-        points[i] = new Point(x, y);
-    }
+        // read the n points from a file
+        In in = new In(args[0]);
+        int n = in.readInt();
+        Point[] points = new Point[n];
+        for (int i = 0; i < n; i++) {
+            int x = in.readInt();
+            int y = in.readInt();
+            points[i] = new Point(x, y);
+        }
 
-    // draw the points
-    StdDraw.enableDoubleBuffering();
-    StdDraw.setXscale(0, 32768);
-    StdDraw.setYscale(0, 32768);
-    for (Point p : points) {
+        // draw the points
+        StdDraw.enableDoubleBuffering();
+        StdDraw.setXscale(0, 32768);
+        StdDraw.setYscale(0, 32768);
+        for (Point p : points) {
         p.draw();
-    }
-    StdDraw.show();
+        }
+        StdDraw.show();
 
-    // print and draw the line segments
-    BruteCollinearPoints collinear = new BruteCollinearPoints(points);
-    for (LineSegment segment : collinear.segments()) {
+        // print and draw the line segments
+        BruteCollinearPoints collinear = new BruteCollinearPoints(points);
+        for (LineSegment segment : collinear.segments()) {
         StdOut.println(segment);
         segment.draw();
+        }
+        StdDraw.show();
     }
-    StdDraw.show();
-}
 }

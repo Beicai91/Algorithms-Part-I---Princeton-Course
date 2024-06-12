@@ -8,16 +8,10 @@ import edu.princeton.cs.algs4.MergeX;
 public class FastCollinearPoints {
     private final LineSegment[] segments;
 
-   public FastCollinearPoints(Point[] points){
-        int len = points.length;
-        Point[] pointsDup = new Point[len];
-        double slope_ref;
-        int storage_idx;
-        int point_counter;
-        Point[][] storage = new Point[len * len][2];
-        int seg_idx;
-        int k;
-
+    public FastCollinearPoints(Point[] points){
+        //check if array is null
+        if (points == null)
+            throw new IllegalArgumentException("Argument of the constructor is NULL.");
         //check for invalid point
         for (int i = 0; i < points.length; i++)
         {
@@ -33,6 +27,17 @@ public class FastCollinearPoints {
                     throw new IllegalArgumentException("Two input points are equal.");
             }
         }
+        
+        
+        int len = points.length;
+        Point[] pointsDup = new Point[len];
+        double slope_ref;
+        int storage_idx;
+        int point_counter;
+        Point[][] storage = new Point[len * len][2];
+        int seg_idx;
+        int k;
+
         //sort the points firstly
         Arrays.sort(points);
 
@@ -185,19 +190,18 @@ public class FastCollinearPoints {
    //function to get the number of segments
     public           int numberOfSegments()
     {
-        int num;
-        
-        num = 0;
-        while (segments[num] != null)
-            num++;
-        return (num);
+        return (segments.length);
 
     } 
 
    //getter function
     public LineSegment[] segments()
     {
-        return (segments);
+        LineSegment[] outputSegments = new LineSegment[segments.length];
+        for (int i = 0; i < segments.length; i++) {
+            outputSegments[i] = segments[i];
+        }
+        return outputSegments;
     }
     public static void main(String[] args) 
     {

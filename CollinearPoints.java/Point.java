@@ -128,6 +128,7 @@ public class Point implements Comparable<Point> {
      * Unit tests the Point data type.
      */
     public static void main(String[] args) {
+        /* 
         List<Point> points = new ArrayList<>();
         points.add(new Point(15, 20));
         points.add(new Point(10, 20));
@@ -142,6 +143,6 @@ public class Point implements Comparable<Point> {
         slopeP1_2 = points.get(1).slopeTo(points.get(2));
         slopeComparator = p_origin.slopeOrder();
         s_order = slopeComparator.compare(points.get(0), points.get(1));
-
+        */
     }
 }
