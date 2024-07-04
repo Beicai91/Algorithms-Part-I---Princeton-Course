@@ -7,14 +7,15 @@ public class Percolation {
     private boolean[][] site;
     private int openCount;
     private int length;
-    private WeightedQuickUnionUF unionFind;
-    private WeightedQuickUnionUF unionFind2;
+    private WeightedQuickUnionUF unionFind; //由 for fullness check (avoid backwash problem)
+    private WeightedQuickUnionUF unionFind2; //申 for percolation check
     private int ele;
     private int virtualTop;
     private int virtualBottom;
 
 
     // create n-by-n grid, with all sites initially blocked
+    //use seperate unionFind structures for fullness check and percolation check avoids the backwash problem: when one of the bottom site, let's say A is full and it's connected to the virtual bottom site, we open another bottom site B that is actually not full but also connected to the bottom virtual site, if we check if B is full, since B is connected to virtual bottom site which is connected to A which is full, B will be falsely identified as full
     public Percolation(int n)
     {
         if (n <= 0)
